@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Estudos - ESA N1 2026/2 Enfermagem</title>
+<style>
+  :root{
+    --butter: #FFE8A3;
+    --butter-deep: #FFD35C;
+    --butter-soft: #FFF6E0;
+    --blue: #1D5D9B;
+    --blue-deep: #133D66;
+    --blue-soft: #E8F1FA;
+    --ink: #2A2A2A;
+    --card: #FFFFFF;
+    --green: #2E9E5B;
+    --red: #D64545;
+    --radius: 14px;
+    --shadow: 0 4px 14px rgba(29,93,155,0.12);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: 'Segoe UI', Verdana, Arial, sans-serif;
+    background: linear-gradient(180deg, var(--butter-soft) 0%, #FFFDF7 40%, var(--blue-soft) 100%);
+    color: var(--ink);
+    min-height:100vh;
+  }
+  header{
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+    color:#fff;
+    padding: 22px 16px 60px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute;
+    top:-40px; right:-40px;
+    width:160px;height:160px;
+    background: var(--butter);
+    border-radius:50%;
+    opacity:0.25;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    bottom:-60px; left:-30px;
+    width:200px;height:200px;
+    background: var(--butter-deep);
+    border-radius:50%;
+    opacity:0.15;
+  }
+  header h1{
+    margin:0 0 6px;
+    font-size: clamp(1.2rem, 4vw, 1.9rem);
+    position:relative;
+  }
+  header p{
+    margin:0;
+    opacity:0.9;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    position:relative;
+  }
+  .icon-row{
+    font-size: 1.6rem;
+    margin-top:10px;
+    position:relative;
+  }
+
+  nav.tabs{
+    display:flex;
+    max-width: 900px;
+    margin: -36px auto 0;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    position:relative;
+    z-index:2;
+    flex-wrap:wrap;
+  }
+  nav.tabs button{
+    flex:1 1 33%;
+    min-width: 110px;
+    padding: 14px 8px;
+    border:none;
+    background: transparent;
+    font-size: clamp(0.75rem, 2.3vw, 0.95rem);
+    font-weight:600;
+    color: var(--blue-deep);
+    cursor:pointer;
+    transition: all 0.25s;
+    border-bottom: 4px solid transparent;
+  }
+  nav.tabs button.active{
+    background: var(--butter);
+    border-bottom: 4px solid var(--blue);
+    color: var(--blue-deep);
+  }
+  nav.tabs button:hover{ background: var(--butter-soft); }
+
+  main{
+    max-width: 900px;
+    margin: 20px auto 60px;
+    padding: 0 14px;
+  }
+  .panel{ display:none; animation: fade .3s ease; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform: translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin: 22px 0 10px;
+    color: var(--blue-deep);
+    font-size: 1.15rem;
+    border-bottom: 3px solid var(--butter-deep);
+    padding-bottom:6px;
+  }
+  .section-title:first-child{ margin-top:6px; }
+
+  /* QUIZ */
+  .quiz-controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    margin-bottom:16px;
+    position:sticky;
+    top:8px;
+    z-index:5;
+  }
+  .score-badge{
+    background: var(--blue);
+    color:#fff;
+    padding:6px 14px;
+    border-radius: 20px;
+    font-weight:700;
+    font-size:0.9rem;
+  }
+  select, button.btn{
+    padding:8px 12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:0.85rem;
+    background:#fff;
+    cursor:pointer;
+  }
+  button.btn{
+    background: var(--blue);
+    color:#fff;
+    border:none;
+    font-weight:600;
+  }
+  button.btn:hover{ background: var(--blue-deep); }
+  button.btn.secondary{
+    background: var(--butter-deep);
+    color: var(--blue-deep);
+  }
+  button.btn.secondary:hover{ background: var(--butter); }
+
+  .qcard{
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    border-left: 6px solid var(--butter-deep);
+  }
+  .qcard .tag{
+    display:inline-block;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    background: var(--blue-soft);
+    color: var(--blue-deep);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:8px;
+    font-weight:700;
+  }
+  .qcard .qnum{ color: var(--blue); font-weight:800; }
+  .qcard h3{
+    margin: 4px 0 12px;
+    font-size:1rem;
+    line-height:1.4;
+  }
+  .options{ display:flex; flex-direction:column; gap:8px; }
+  .option{
+    text-align:left;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1.5px solid #e2e2e2;
+    background:#fafafa;
+    cursor:pointer;
+    font-size:0.9rem;
+    transition: all 0.15s;
+  }
+  .option:hover{ border-color: var(--blue); background: var(--blue-soft); }
+  .option.correct{ background:#DDF5E4; border-color: var(--green); font-weight:700; }
+  .option.wrong{ background:#FBDFDF; border-color: var(--red); }
+  .option.disabled{ pointer-events:none; opacity:0.85; }
+  .explanation{
+    margin-top:10px;
+    padding:10px 12px;
+    background: var(--butter-soft);
+    border-radius:10px;
+    font-size:0.85rem;
+    display:none;
+    border-left:4px solid var(--butter-deep);
+  }
+  .explanation.show{ display:block; }
+
+  /* RESUMO / TOPICOS */
+  .card{
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    border-top: 5px solid var(--blue);
+  }
+  .card h2{
+    margin:0 0 10px;
+    color: var(--blue-deep);
+    font-size:1.1rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .card ul{ margin: 6px 0; padding-left: 20px; }
+  .card li{ margin-bottom:6px; line-height:1.5; font-size:0.92rem; }
+  .card p{ line-height:1.6; font-size:0.92rem; }
+  .card strong{ color: var(--blue-deep); }
+
+  .topic-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+    gap:10px;
+    margin-top:8px;
+  }
+  .topic-chip{
+    background: var(--blue-soft);
+    border-left: 4px solid var(--blue);
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:0.88rem;
+  }
+  .topic-chip b{ color: var(--blue-deep); display:block; margin-bottom:2px; }
+
+  table.info{
+    width:100%;
+    border-collapse: collapse;
+    font-size:0.85rem;
+    margin-top:8px;
+  }
+  table.info th, table.info td{
+    border:1px solid #e0e0e0;
+    padding:8px 10px;
+    text-align:left;
+  }
+  table.info th{ background: var(--blue-soft); color: var(--blue-deep); }
+
+  footer{
+    text-align:center;
+    padding: 20px;
+    color: var(--blue-deep);
+    font-size:0.8rem;
+    opacity:0.75;
+  }
+
+  @media (max-width:480px){
+    nav.tabs{ margin-top:-28px; }
+    nav.tabs button{ padding:12px 4px; }
+    .quiz-controls{ flex-direction:column; align-items:stretch; }
+    .quiz-controls > *{ width:100%; }
+    table.info{ font-size:0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="icon-row">💛💙 🩺</div>
+  <h1>Guia de Estudos — ESA N1 2026/2</h1>
+  <p>Exame de Suficiência Acadêmica · Curso de Enfermagem · Grupos 1, 2 e 3</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="quiz">📝 Questões (100)</button>
+  <button class="tab-btn" data-tab="resumo">📖 Resumo</button>
+  <button class="tab-btn" data-tab="topicos">🗂️ Tópicos</button>
+</nav>
+
+<main>
+
+  <!-- QUIZ TAB -->
+  <section id="quiz" class="panel active">
+    <div class="quiz-controls">
+      <select id="filterSubject">
+        <option value="all">Todas as disciplinas</option>
+      </select>
+      <span class="score-badge" id="scoreBadge">Acertos: 0 / 0</span>
+      <button class="btn secondary" id="resetBtn">🔄 Refazer</button>
+    </div>
+    <div id="questionsList"></div>
+  </section>
+
+  <!-- RESUMO TAB -->
+  <section id="resumo" class="panel">
+    <div class="section-title">📖 Resumo do Edital ESA N1 2026/2</div>
+
+    <div class="card">
+      <h2>📋 Estrutura da prova</h2>
+      <p>O caderno de prova do ESA (Exame de Suficiência Acadêmica) terá <strong>25 questões objetivas de múltipla escolha</strong> no total, sendo:</p>
+      <ul>
+        <li><strong>5 questões</strong> de Conhecimento Geral e Atualidades (raciocínio lógico, interpretação de textos, gráficos e imagens);</li>
+        <li><strong>10 questões</strong> de conteúdos específicos teóricos;</li>
+        <li><strong>10 questões</strong> de conteúdos específicos práticos.</li>
+      </ul>
+      <p>Os primeiros períodos (1º) respondem apenas questões de Conhecimento Geral, Atualidades, Língua Portuguesa, interpretação/análise de gráficos, funções de 1º e 2º grau, raciocínio lógico e matemática — <strong>não respondem questões específicas do curso</strong>.</p>
+    </div>
+
+    <div class="card">
+      <h2>👥 Grupos por período — Enfermagem</h2>
+      <table class="info">
+        <tr><th>Grupo</th><th>Período</th><th>Conteúdo</th></tr>
+        <tr><td>1</td><td>1º</td><td>Língua Portuguesa, Conhecimentos Gerais e Atualidades, Raciocínio Lógico</td></tr>
+        <tr><td>2</td><td>2º, 3º e 4º</td><td>Grupo 1 + Microbiologia, Anatomia Humana Básica, Fundamentos Históricos de Enfermagem, Embriologia/Genética/Evolução, Citologia e Histologia</td></tr>
+        <tr><td>3</td><td>5º e 6º</td><td>Grupos 1 e 2 + Probabilidade e Estatística, Anatomia Humana Sistêmica (SNC), Metodologia de Pesquisa Científica, Psicologia aplicada à saúde, Fisiologia Humana e Biofísica, Fundamentos Teóricos e Técnicos de Enfermagem, Nutrição e Dietética, Epidemiologia e Saúde Coletiva, Estratégia de Saúde da Família, Semiologia e Semiotécnica I e II, Parasitologia</td></tr>
+        <tr><td>4</td><td>7º e 8º</td><td>Grupos 1, 2 e 3 + Farmacologia, Imunologia, Ética/Exercício Profissional e Direitos Humanos, Saúde da Mulher, Enfermagem em Central de Material e Esterilização (CME), Políticas Públicas na Atenção Básica</td></tr>
+        <tr><td>5</td><td>9º e 10º</td><td>Todos os grupos anteriores + Controle de Infecção/Biossegurança, Saúde do Trabalhador</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>🗓️ Datas e regras importantes</h2>
+      <ul>
+        <li><strong>Prova:</strong> 23 de setembro de 2026 (Enfermagem), de forma presencial — não há segunda chamada.</li>
+        <li><strong>Horários:</strong> Matutino 08h às 10h40; Noturno 18h50 às 21h30 (duração de 2h40).</li>
+        <li><strong>Tolerância de atraso:</strong> 30 minutos, após esse período os portões são fechados.</li>
+        <li><strong>Caneta obrigatória:</strong> preta, para o cartão-resposta.</li>
+        <li><strong>Gabarito:</strong> divulgado no portal do aluno em 28 de setembro de 2026 às 12h.</li>
+        <li><strong>Recurso:</strong> prazo de 48h após publicação do gabarito, individual e fundamentado, com imagem da questão anexada, via portal de recursos (Resolução CONSUP nº 006/2018).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🧮 Cálculo da nota</h2>
+      <p>A nota do ESA varia de 0 a 2 pontos. Cada questão de Conhecimentos Gerais (CG) vale 0,08, e cada questão de Conhecimentos Específicos (CE) também vale 0,08.</p>
+      <p><strong>NOTA ESA = 0,08 × (acertos em CG) + 0,08 × (acertos em CE)</strong></p>
+    </div>
+
+    <div class="card">
+      <h2>🧬 Revisão rápida de conteúdo por disciplina</h2>
+      <p><strong>Microbiologia:</strong> estuda bactérias (bacteriologia), sua estrutura (parede celular, cápsula, flagelos), técnicas de análise (coloração de Gram) e doenças como a leptospirose (causada pela bactéria <em>Leptospira interrogans</em>, transmitida pela urina de roedores). A fisiopatologia da infecção envolve colonização, invasão, multiplicação e resposta do hospedeiro.</p>
+      <p><strong>Anatomia Humana Básica:</strong> o esqueleto humano adulto possui 206 ossos; o sistema muscular é dividido em musculatura esquelética (estriada voluntária), lisa (involuntária) e cardíaca (estriada involuntária). Os cortes anatômicos de referência são sagital, frontal (coronal) e transversal. A organização sistêmica segue a hierarquia: célula → tecido → órgão → sistema → organismo.</p>
+      <p><strong>Fundamentos Históricos de Enfermagem:</strong> Florence Nightingale é considerada a fundadora da enfermagem moderna (Guerra da Criméia, 1854). No Brasil, Anna Nery é a patrona da enfermagem, e a Escola Ana Nery (1923) foi a primeira escola de enfermagem organizada nos moldes Nightingale. COFEN e COREN são as principais entidades de classe reguladoras da profissão.</p>
+      <p><strong>Embriologia, Genética e Evolução:</strong> o ciclo menstrual tem fases folicular, ovulatória e lútea; a espermatogênese ocorre nos túbulos seminíferos dos testículos; a fecundação normalmente ocorre na ampola da tuba uterina. Alterações cromossômicas numéricas, como a trissomia do cromossomo 21, causam a Síndrome de Down. A teratogênese é mais crítica durante o período embrionário (organogênese).</p>
+      <p><strong>Citologia e Histologia:</strong> os quatro tecidos básicos são epitelial (revestimento e glândulas), conjuntivo (sustentação e preenchimento), muscular (contração) e nervoso. As mitocôndrias são responsáveis pela respiração celular e produção de ATP. A divisão celular ocorre por mitose (células somáticas, mantém o número cromossômico) ou meiose (células germinativas, reduz à metade).</p>
+      <p><strong>Probabilidade e Estatística:</strong> as medidas de tendência central são média, mediana e moda. A regra de três é usada para resolver problemas de proporcionalidade direta ou inversa. A probabilidade de um evento é calculada pela razão entre casos favoráveis e casos possíveis.</p>
+      <p><strong>Anatomia Humana Sistêmica (SNC):</strong> o Sistema Nervoso Central é formado pelo encéfalo (cérebro, cerebelo e tronco encefálico) e pela medula espinhal, protegidos pelas meninges (dura-máter, aracnoide e pia-máter).</p>
+      <p><strong>Metodologia de Pesquisa Científica:</strong> o método científico segue etapas como observação, formulação de hipóteses, experimentação e conclusão. Pesquisas com seres humanos no Brasil são regulamentadas pela Resolução CNS nº 466/2012, exigindo aprovação de um Comitê de Ética em Pesquisa (CEP).</p>
+    </div>
+  </section>
+
+  <!-- TOPICOS TAB -->
+  <section id="topicos" class="panel">
+    <div class="section-title">🗂️ Principais Tópicos por Disciplina</div>
+
+    <div class="card">
+      <h2>1️⃣ Grupo 1 — Base comum (1º período)</h2>
+      <div class="topic-grid">
+        <div class="topic-chip"><b>Língua Portuguesa</b>Interpretação de texto, concordância, crase, figuras de linguagem</div>
+        <div class="topic-chip"><b>Conhecimentos Gerais e Atualidades</b>Temas sociais, saúde, ética, meio ambiente, tecnologia</div>
+        <div class="topic-chip"><b>Raciocínio Lógico</b>Sequências, proposições, lógica matemática</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2️⃣ Grupo 2 — 2º, 3º e 4º períodos</h2>
+      <div class="topic-grid">
+        <div class="topic-chip"><b>Microbiologia</b>Análise microbiológica, Leptospirose, estrutura bacteriana, fisiopatologia da infecção, bacteriologia</div>
+        <div class="topic-chip"><b>Anatomia Humana Básica</b>Sistema esquelético, sistema muscular, corte anatômico, organização sistêmica</div>
+        <div class="topic-chip"><b>Fundamentos Históricos de Enfermagem</b>Desenvolvimento no Brasil, evolução das práticas, entidades de classe, ciência na enfermagem</div>
+        <div class="topic-chip"><b>Embriologia, Genética e Evolução</b>Ciclo menstrual, espermatogênese, fecundação, tecidos, alteração cromossômica</div>
+        <div class="topic-chip"><b>Citologia e Histologia</b>Mecanismos de ação, divisão celular, fase hormonal, organelas, origem da vida, teratogênese</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3️⃣ Grupo 3 — 5º e 6º períodos</h2>
+      <div class="topic-grid">
+        <div class="topic-chip"><b>Probabilidade e Estatística</b>Porcentagem, probabilidade, medidas de tendência central, regra de três</div>
+        <div class="topic-chip"><b>Anatomia Humana Sistêmica</b>Sistema Nervoso Central</div>
+        <div class="topic-chip"><b>Metodologia de Pesquisa Científica</b>Método científico, pesquisa com seres humanos</div>
+        <div class="topic-chip"><b>Psicologia aplicada à saúde</b>Estágios do luto, cuidados paliativos</div>
+        <div class="topic-chip"><b>Fisiologia Humana e Biofísica</b>Fisiologia das membranas, Sistema Nervoso</div>
+        <div class="topic-chip"><b>Fundamentos Técnicos de Enfermagem</b>Registro/documentação, sinais vitais</div>
+        <div class="topic-chip"><b>Nutrição e Dietética</b>Alimentação saudável, nutrição aplicada</div>
+        <div class="topic-chip"><b>Epidemiologia e Saúde Coletiva</b>Indicadores de saúde, Estratégia de Saúde da Família</div>
+        <div class="topic-chip"><b>Estratégia de Saúde da Família</b>Visita domiciliar, Rede de Atenção à Saúde, Atenção Básica</div>
+        <div class="topic-chip"><b>Semiologia e Semiotécnica I e II</b>Sonda nasoentérica, cálculo de medicamentos, vias de administração, exame físico, sondagem</div>
+        <div class="topic-chip"><b>Parasitologia</b>Características das doenças parasitárias, protozoários</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>4️⃣ Grupo 4 — 7º e 8º períodos</h2>
+      <div class="topic-grid">
+        <div class="topic-chip"><b>Farmacologia</b>Hipoglicemiantes, antimicrobianos, escolha de AINEs, enterocolite e absorção</div>
+        <div class="topic-chip"><b>Imunologia</b>Imunidade inata</div>
+        <div class="topic-chip"><b>Ética, Exercício Profissional e Direitos Humanos</b>Relações de trabalho</div>
+        <div class="topic-chip"><b>Saúde da Mulher</b>Consulta de enfermagem</div>
+        <div class="topic-chip"><b>Enfermagem em Central de Material e Esterilização</b>Estrutura física e funcional do CME</div>
+        <div class="topic-chip"><b>Políticas Públicas na Atenção Básica</b>Lei Orgânica da Saúde 8.080/90, vigilância em saúde</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Feito com 💛💙 para você — Guia de Estudos ESA N1 2026/2 — Enfermagem</footer>
+
+<script>
+const questions = [
+// ===================== LÍNGUA PORTUGUESA (4) =====================
+{s:"Língua Portuguesa", q:"Assinale a frase em que a concordância verbal está CORRETA, considerando o verbo 'fazer' indicando tempo decorrido:", o:["Fazem dois anos que ela se formou em enfermagem.","Faz dois anos que ela se formou em enfermagem.","Fazem dois anos atrás que ela se formou.","Houveram dois anos desde a formatura."], c:1, e:"Quando o verbo 'fazer' indica tempo transcorrido, é impessoal e fica sempre na 3ª pessoa do singular: 'Faz dois anos...'."},
+{s:"Língua Portuguesa", q:"Em qual frase o uso da crase está CORRETO?", o:["Cheguei à uma hora da tarde.","Refiro-me à diretora do curso.","Entreguei o relatório à ela.","Fomos à pé até o hospital."], c:1, e:"Há crase diante de palavra feminina regida por preposição 'a' quando o verbo exige a preposição: 'Refiro-me à diretora' (referir-se a + a diretora)."},
+{s:"Língua Portuguesa", q:"Na frase 'O hospital estava um caos', a figura de linguagem empregada é:", o:["Metáfora","Metonímia","Hipérbato","Onomatopeia"], c:0, e:"A metáfora é uma comparação implícita entre dois elementos sem uso de conectivo comparativo, como em 'o hospital estava um caos'."},
+{s:"Língua Portuguesa", q:"A conjunção 'conquanto', presente em 'Conquanto estivesse cansada, terminou o plantão', estabelece uma relação de:", o:["Causa","Concessão","Condição","Consequência"], c:1, e:"'Conquanto' é uma conjunção concessiva, equivalente a 'embora' ou 'apesar de', indicando um fato que não impede a ação principal."},
+
+// ===================== CONHECIMENTOS GERAIS E ATUALIDADES (4) =====================
+{s:"Conhecimentos Gerais", q:"São princípios doutrinários do Sistema Único de Saúde (SUS):", o:["Universalidade, equidade e integralidade","Privatização, seletividade e regionalização apenas","Gratuidade parcial e hierarquização exclusiva","Centralização total e verticalização"], c:0, e:"Os princípios doutrinários do SUS são universalidade (acesso a todos), equidade (tratar desigualmente os desiguais) e integralidade (atenção completa ao indivíduo)."},
+{s:"Conhecimentos Gerais", q:"A Agenda 2030 da ONU, que estabelece os Objetivos de Desenvolvimento Sustentável (ODS), é composta por quantos objetivos?", o:["8 objetivos","12 objetivos","17 objetivos","20 objetivos"], c:2, e:"A Agenda 2030 estabelece 17 Objetivos de Desenvolvimento Sustentável (ODS), incluindo saúde e bem-estar (ODS 3)."},
+{s:"Conhecimentos Gerais", q:"O Brasil, segundo sua Constituição Federal de 1988, é organizado politicamente como:", o:["Monarquia parlamentarista","República Federativa Presidencialista","Confederação de estados autônomos","Império constitucional"], c:1, e:"O Brasil é uma República Federativa, com sistema de governo presidencialista, conforme a Constituição de 1988."},
+{s:"Conhecimentos Gerais", q:"Sobre segurança alimentar e nutricional, é correto afirmar que ela envolve:", o:["Apenas a produção de alimentos em larga escala","O acesso regular e permanente a alimentos de qualidade, em quantidade suficiente, sem comprometer outras necessidades essenciais","Exclusivamente a fiscalização de rótulos de alimentos industrializados","Somente políticas de exportação agrícola"], c:1, e:"Segurança alimentar e nutricional é o direito de acesso regular a alimentos de qualidade e em quantidade suficiente, sem comprometer o acesso a outras necessidades básicas."},
+
+// ===================== RACIOCÍNIO LÓGICO (4) =====================
+{s:"Raciocínio Lógico", q:"Na sequência numérica 2, 4, 8, 16, 32, ..., qual é o próximo número?", o:["48","56","64","128"], c:2, e:"A sequência dobra o valor anterior (progressão geométrica de razão 2): 32 x 2 = 64."},
+{s:"Raciocínio Lógico", q:"A negação lógica da proposição 'Todos os pacientes foram vacinados' é:", o:["Nenhum paciente foi vacinado","Pelo menos um paciente não foi vacinado","Todos os pacientes não foram vacinados","Alguns pacientes foram vacinados"], c:1, e:"A negação de 'todos são X' é 'existe pelo menos um que não é X', ou seja, 'pelo menos um paciente não foi vacinado'."},
+{s:"Raciocínio Lógico", q:"Se a proposição composta 'P e Q' é VERDADEIRA, então:", o:["P é verdadeira e Q é falsa","P é falsa e Q é verdadeira","Tanto P quanto Q são verdadeiras","Pelo menos uma das duas é falsa"], c:2, e:"Na tabela-verdade do conectivo 'e' (conjunção), o resultado só é verdadeiro quando ambas as proposições, P e Q, são verdadeiras."},
+{s:"Raciocínio Lógico", q:"Em um silogismo: 'Toda enfermeira é profissional de saúde. Maria é enfermeira.' Qual conclusão é logicamente válida?", o:["Maria não é profissional de saúde","Maria é profissional de saúde","Todo profissional de saúde é enfermeira","Nenhuma conclusão pode ser tirada"], c:1, e:"Trata-se de um silogismo válido (modus ponens): se toda enfermeira é profissional de saúde e Maria é enfermeira, logo Maria é profissional de saúde."},
+
+// ===================== MICROBIOLOGIA (6) =====================
+{s:"Microbiologia", q:"A técnica de coloração de Gram permite classificar as bactérias, principalmente, em função de:", o:["Sua capacidade de locomoção","A composição da parede celular (peptideoglicano)","O tamanho do genoma bacteriano","A presença de núcleo verdadeiro"], c:1, e:"A coloração de Gram diferencia bactérias Gram-positivas (parede espessa de peptideoglicano, coram-se de roxo) e Gram-negativas (parede fina, coram-se de rosa)."},
+{s:"Microbiologia", q:"A leptospirose é causada por qual agente etiológico e principal forma de transmissão?", o:["Vírus, transmitido por mosquitos","Bactéria do gênero Leptospira, transmitida pelo contato com urina de roedores infectados","Fungo, transmitido por inalação de esporos","Protozoário, transmitido por vetor triatomíneo"], c:1, e:"A leptospirose é causada pela bactéria Leptospira interrogans, cuja principal via de transmissão é o contato com água ou solo contaminados pela urina de roedores infectados."},
+{s:"Microbiologia", q:"Quanto à estrutura bacteriana, a cápsula tem como principal função:", o:["Realizar a fotossíntese bacteriana","Proteger a bactéria da fagocitose e da dessecação, contribuindo para a virulência","Armazenar material genético adicional","Promover a divisão celular por mitose"], c:1, e:"A cápsula bacteriana é uma camada externa que protege contra fagocitose e desidratação, sendo um importante fator de virulência."},
+{s:"Microbiologia", q:"Na fisiopatologia da infecção, a etapa em que o microrganismo se fixa e começa a se multiplicar no hospedeiro, sem necessariamente causar dano, é chamada de:", o:["Colonização","Necrose","Fagocitose","Apoptose"], c:0, e:"A colonização é a etapa inicial em que o microrganismo se estabelece e se multiplica no hospedeiro, podendo ou não evoluir para infecção sintomática."},
+{s:"Microbiologia", q:"Quanto à morfologia bacteriana, os cocos, bacilos e espirilos são classificados de acordo com:", o:["O tipo de metabolismo energético","A forma da célula bacteriana","A resistência a antibióticos","A capacidade de esporulação"], c:1, e:"Cocos (esféricos), bacilos (em bastonete) e espirilos (espiralados) são classificações baseadas na forma (morfologia) da célula bacteriana."},
+{s:"Microbiologia", q:"Os esporos bacterianos, formados por algumas espécies como Bacillus e Clostridium, são estruturas que conferem:", o:["Maior mobilidade à bactéria","Alta resistência a condições ambientais adversas, como calor e dessecação","Capacidade de realizar fotossíntese","Redução da capacidade de sobrevivência da bactéria"], c:1, e:"Os esporos bacterianos são formas de resistência extremamente resilientes ao calor, dessecação e desinfetantes, dificultando a esterilização."},
+
+// ===================== ANATOMIA HUMANA BÁSICA (5) =====================
+{s:"Anatomia Básica", q:"O esqueleto humano adulto é formado, aproximadamente, por quantos ossos?", o:["126 ossos","156 ossos","206 ossos","256 ossos"], c:2, e:"O esqueleto humano adulto possui aproximadamente 206 ossos, número que é maior ao nascimento devido à fusão de ossos durante o desenvolvimento."},
+{s:"Anatomia Básica", q:"Os três tipos de tecido muscular presentes no corpo humano são:", o:["Esquelético, liso e cardíaco","Estriado, conjuntivo e epitelial","Voluntário, glandular e nervoso","Cardíaco, ósseo e adiposo"], c:0, e:"Os três tipos de tecido muscular são: esquelético (estriado voluntário), liso (involuntário) e cardíaco (estriado involuntário)."},
+{s:"Anatomia Básica", q:"O corte anatômico que divide o corpo em partes anterior e posterior é denominado:", o:["Corte sagital","Corte transversal","Corte frontal (coronal)","Corte oblíquo"], c:2, e:"O plano frontal (ou coronal) divide o corpo em uma porção anterior (ventral) e uma porção posterior (dorsal)."},
+{s:"Anatomia Básica", q:"A organização sistêmica do corpo humano segue a hierarquia:", o:["Órgão → célula → sistema → tecido → organismo","Célula → tecido → órgão → sistema → organismo","Tecido → organismo → célula → sistema → órgão","Sistema → organismo → tecido → célula → órgão"], c:1, e:"A hierarquia correta da organização biológica é: célula → tecido → órgão → sistema → organismo."},
+{s:"Anatomia Básica", q:"As articulações que permitem maior amplitude de movimento, como o ombro e o quadril, são classificadas como:", o:["Sinartroses","Anfiartroses","Diartroses (sinoviais)","Sincondroses"], c:2, e:"As diartroses, ou articulações sinoviais, permitem ampla movimentação e possuem cavidade sinovial, como ocorre no ombro e no quadril."},
+
+// ===================== FUNDAMENTOS HISTÓRICOS DE ENFERMAGEM (5) =====================
+{s:"Fundamentos Históricos", q:"Florence Nightingale é considerada a fundadora da enfermagem moderna principalmente por seu trabalho durante:", o:["A Segunda Guerra Mundial","A Guerra da Criméia (1854)","A Guerra do Vietnã","A Guerra Civil Americana"], c:1, e:"Florence Nightingale se destacou durante a Guerra da Criméia (1854), implementando padrões de higiene e cuidado que reduziram drasticamente a mortalidade dos feridos."},
+{s:"Fundamentos Históricos", q:"A patrona da enfermagem brasileira, que atuou na Guerra do Paraguai cuidando de feridos, é:", o:["Florence Nightingale","Anna Nery","Wanda de Aguiar Horta","Clara Barton"], c:1, e:"Anna Justina Ferreira Nery é a patrona da enfermagem brasileira, reconhecida por sua atuação na Guerra do Paraguai (1864-1870)."},
+{s:"Fundamentos Históricos", q:"A primeira escola de enfermagem organizada nos moldes Nightingale no Brasil, fundada em 1923, é conhecida como:", o:["Escola Wanda de Aguiar Horta","Escola Ana Nery","Escola Florence Nightingale do Brasil","Escola Técnica de Saúde"], c:1, e:"A Escola Ana Nery, fundada em 1923 no Rio de Janeiro, foi a primeira escola de enfermagem brasileira organizada segundo o modelo Nightingale."},
+{s:"Fundamentos Históricos", q:"No Brasil, as principais entidades de classe que regulamentam e fiscalizam o exercício profissional da enfermagem são:", o:["CFM e CRM","COFEN e COREN","CFF e CRF","CFO e CRO"], c:1, e:"O COFEN (Conselho Federal de Enfermagem) e os COREN (Conselhos Regionais de Enfermagem) são responsáveis por regulamentar e fiscalizar a profissão no Brasil."},
+{s:"Fundamentos Históricos", q:"Antes da reforma promovida por Florence Nightingale, a prática de enfermagem no mundo ocidental era predominantemente associada a:", o:["Uma profissão de alto prestígio técnico e científico","Atividades de caridade religiosa, exercidas principalmente por ordens religiosas","Uma especialidade médica avançada","Uma carreira militar de comando"], c:1, e:"Antes de Nightingale, o cuidado aos enfermos era, em geral, uma atividade de caridade religiosa, sem base científica sistematizada."},
+
+// ===================== EMBRIOLOGIA, GENÉTICA E EVOLUÇÃO (6) =====================
+{s:"Embriologia e Genética", q:"O ciclo menstrual é dividido, classicamente, nas seguintes fases:", o:["Fase folicular, ovulação e fase lútea","Fase embrionária, fetal e neonatal","Fase G1, S e G2","Fase de clivagem, gastrulação e organogênese"], c:0, e:"O ciclo menstrual compreende a fase folicular (desenvolvimento do folículo), a ovulação e a fase lútea (formação do corpo lúteo)."},
+{s:"Embriologia e Genética", q:"A espermatogênese, processo de formação dos espermatozoides, ocorre em qual estrutura?", o:["Epidídimo","Túbulos seminíferos dos testículos","Vesícula seminal","Próstata"], c:1, e:"A espermatogênese ocorre nos túbulos seminíferos, localizados nos testículos, a partir das células germinativas."},
+{s:"Embriologia e Genética", q:"A fecundação humana ocorre, na maioria das vezes, em qual local?", o:["No útero","No colo uterino","Na ampola da tuba uterina","No ovário"], c:2, e:"A fecundação geralmente ocorre na ampola da tuba uterina, região onde o óvulo e o espermatozoide se encontram."},
+{s:"Embriologia e Genética", q:"A Síndrome de Down é causada por qual tipo de alteração cromossômica?", o:["Deleção do cromossomo X","Trissomia do cromossomo 21","Monossomia do cromossomo 18","Translocação balanceada sem efeito fenotípico"], c:1, e:"A Síndrome de Down é causada, na maioria dos casos, pela presença de uma cópia extra do cromossomo 21 (trissomia do 21)."},
+{s:"Embriologia e Genética", q:"O período de maior vulnerabilidade do embrião a agentes teratogênicos, com risco de malformações estruturais graves, corresponde a:", o:["O período fetal tardio (terceiro trimestre)","O período embrionário, durante a organogênese (primeiras semanas de gestação)","Apenas o momento do parto","O período pós-natal imediato"], c:1, e:"O período embrionário, quando ocorre a organogênese, é o de maior sensibilidade a agentes teratogênicos, podendo resultar em malformações estruturais."},
+{s:"Embriologia e Genética", q:"A teoria da evolução química da origem da vida, proposta por Oparin e Haldane, sugere que:", o:["A vida surgiu de forma instantânea por geração espontânea clássica","Moléculas orgânicas simples se formaram a partir de compostos inorgânicos na atmosfera primitiva, originando moléculas mais complexas","A vida foi trazida à Terra exclusivamente por meteoritos","Todos os seres vivos surgiram simultaneamente na forma atual"], c:1, e:"A teoria de Oparin-Haldane propõe que, na atmosfera primitiva, compostos inorgânicos deram origem a moléculas orgânicas simples, que evoluíram para estruturas mais complexas, precursoras da vida."},
+
+// ===================== CITOLOGIA E HISTOLOGIA (6) =====================
+{s:"Citologia e Histologia", q:"O tecido responsável por revestir superfícies corporais e formar glândulas é o:", o:["Tecido conjuntivo","Tecido epitelial","Tecido muscular","Tecido nervoso"], c:1, e:"O tecido epitelial reveste superfícies internas e externas do corpo e também forma as glândulas exócrinas e endócrinas."},
+{s:"Citologia e Histologia", q:"A principal função do tecido conjuntivo no organismo é:", o:["Contração e geração de movimento","Condução de impulsos nervosos","Sustentação, preenchimento e conexão entre outros tecidos","Revestimento exclusivo de cavidades corporais"], c:2, e:"O tecido conjuntivo tem função de sustentação, preenchimento de espaços e conexão entre diferentes tecidos e órgãos."},
+{s:"Citologia e Histologia", q:"A organela celular responsável pela respiração celular e produção de ATP é:", o:["Complexo de Golgi","Retículo endoplasmático liso","Mitocôndria","Lisossomo"], c:2, e:"A mitocôndria é a organela responsável pela respiração celular aeróbica, produzindo ATP, a principal moeda energética da célula."},
+{s:"Citologia e Histologia", q:"A divisão celular que ocorre nas células germinativas, reduzindo o número de cromossomos à metade, é chamada de:", o:["Mitose","Meiose","Citocinese simples","Amitose"], c:1, e:"A meiose ocorre nas células germinativas e reduz o número de cromossomos à metade, sendo essencial para a formação de gametas."},
+{s:"Citologia e Histologia", q:"O mecanismo de transporte pelo qual a água atravessa a membrana celular de uma região de menor concentração de soluto para uma de maior concentração é chamado de:", o:["Difusão simples","Osmose","Transporte ativo","Endocitose"], c:1, e:"A osmose é a passagem de água através de uma membrana semipermeável, de uma região menos concentrada em soluto para outra mais concentrada."},
+{s:"Citologia e Histologia", q:"Na mitose, ao final do processo, o resultado esperado é:", o:["Quatro células filhas geneticamente diferentes","Duas células filhas geneticamente idênticas à célula-mãe","Uma célula com metade do número de cromossomos","Fusão de duas células em uma só"], c:1, e:"A mitose produz duas células filhas geneticamente idênticas à célula-mãe, mantendo o número cromossômico original, sendo o processo responsável pelo crescimento e reparo dos tecidos."},
+
+// ===================== PROBABILIDADE E ESTATÍSTICA (4) =====================
+{s:"Probabilidade e Estatística", q:"Em um conjunto de dados, o valor que aparece com maior frequência é chamado de:", o:["Média","Mediana","Moda","Desvio padrão"], c:2, e:"A moda é o valor que ocorre com maior frequência em um conjunto de dados."},
+{s:"Probabilidade e Estatística", q:"Se 8 ampolas de um medicamento custam R$ 40,00, quanto custarão 20 ampolas do mesmo medicamento (regra de três simples direta)?", o:["R$ 80,00","R$ 100,00","R$ 120,00","R$ 160,00"], c:1, e:"Regra de três: 8 ampolas → R$40; 20 ampolas → x. x = (20 x 40) / 8 = R$100,00."},
+{s:"Probabilidade e Estatística", q:"Um hospital atendeu 250 pacientes em um mês, dos quais 50 apresentaram alguma intercorrência. Qual a porcentagem de pacientes com intercorrência?", o:["10%","15%","20%","25%"], c:2, e:"50/250 = 0,20 = 20%. Portanto, 20% dos pacientes apresentaram intercorrência."},
+{s:"Probabilidade e Estatística", q:"Ao lançar um dado de 6 faces não viciado, qual a probabilidade de obter um número maior que 4?", o:["1/6","1/3","1/2","2/3"], c:1, e:"Números maiores que 4 em um dado de 6 faces: 5 e 6 (2 casos favoráveis). Probabilidade = 2/6 = 1/3."},
+
+// ===================== ANATOMIA HUMANA SISTÊMICA - SNC (3) =====================
+{s:"Anatomia Sistêmica (SNC)", q:"O Sistema Nervoso Central (SNC) é constituído por:", o:["Nervos periféricos e gânglios apenas","Encéfalo e medula espinhal","Apenas o cérebro","Medula espinhal e nervos cranianos"], c:1, e:"O SNC é formado pelo encéfalo (cérebro, cerebelo e tronco encefálico) e pela medula espinhal, protegidos por ossos e meninges."},
+{s:"Anatomia Sistêmica (SNC)", q:"A estrutura encefálica responsável, principalmente, pela coordenação motora, equilíbrio e postura é:", o:["O cerebelo","O hipotálamo","O bulbo raquidiano isoladamente","O corpo caloso"], c:0, e:"O cerebelo é a estrutura encefálica responsável pela coordenação dos movimentos voluntários, equilíbrio e postura corporal."},
+{s:"Anatomia Sistêmica (SNC)", q:"As meninges, membranas que envolvem e protegem o encéfalo e a medula espinhal, da mais externa para a mais interna, são:", o:["Pia-máter, aracnoide e dura-máter","Dura-máter, aracnoide e pia-máter","Aracnoide, dura-máter e pia-máter","Dura-máter, pia-máter e aracnoide"], c:1, e:"As meninges, da mais externa para a mais interna, são: dura-máter, aracnoide e pia-máter."},
+
+// ===================== METODOLOGIA DE PESQUISA CIENTÍFICA (3) =====================
+{s:"Metodologia Científica", q:"As etapas clássicas do método científico incluem, na ordem geral:", o:["Conclusão, hipótese, observação e experimentação","Observação, formulação de hipótese, experimentação e conclusão","Experimentação, observação e opinião pessoal","Apenas a divulgação dos resultados em periódicos"], c:1, e:"O método científico segue, de forma geral, as etapas de observação de um fenômeno, formulação de hipótese, experimentação/teste e conclusão."},
+{s:"Metodologia Científica", q:"No Brasil, pesquisas envolvendo seres humanos devem ser aprovadas por qual instância, conforme a Resolução CNS nº 466/2012?", o:["Diretoria do hospital, sem necessidade de outro órgão","Comitê de Ética em Pesquisa (CEP)","Apenas o próprio pesquisador responsável","Secretaria Municipal de Saúde exclusivamente"], c:1, e:"A Resolução CNS nº 466/2012 exige que toda pesquisa envolvendo seres humanos seja previamente avaliada e aprovada por um Comitê de Ética em Pesquisa (CEP)."},
+{s:"Metodologia Científica", q:"Uma pesquisa que busca compreender significados, percepções e experiências dos participantes, sem uso predominante de dados numéricos, é classificada como:", o:["Pesquisa quantitativa","Pesquisa qualitativa","Pesquisa experimental randomizada apenas","Meta-análise estatística"], c:1, e:"A pesquisa qualitativa busca compreender significados, percepções e experiências, priorizando dados não numéricos, em contraste com a pesquisa quantitativa, baseada em dados estatísticos."},
+
+// ===================== MÉTODO CIENTÍFICO (2) =====================
+{s:"Método Científico", q:"A etapa do método científico em que o pesquisador propõe uma explicação provisória e testável para o fenômeno observado é denominada:", o:["Observação","Hipótese","Publicação","Revisão sistemática"], c:1, e:"A hipótese é a explicação provisória, testável, formulada a partir da observação inicial de um fenômeno, que será posteriormente confirmada ou refutada por experimentação."},
+{s:"Método Científico", q:"Um estudo em que o pesquisador manipula deliberadamente uma variável (variável independente) para observar seu efeito sobre outra (variável dependente), utilizando grupo controle, é classificado como:", o:["Estudo observacional descritivo","Estudo experimental","Relato de caso","Estudo ecológico"], c:1, e:"O estudo experimental é caracterizado pela manipulação intencional da variável independente pelo pesquisador, com uso de grupo controle para comparação dos efeitos."},
+
+// ===================== PESQUISA COM SERES HUMANOS (2) =====================
+{s:"Pesquisa com Seres Humanos", q:"O documento que formaliza a concordância voluntária e esclarecida do participante em integrar uma pesquisa científica é denominado:", o:["Termo de Consentimento Livre e Esclarecido (TCLE)","Parecer consubstanciado do CEP","Protocolo de pesquisa","Currículo Lattes do pesquisador"], c:0, e:"O TCLE (Termo de Consentimento Livre e Esclarecido) documenta que o participante foi devidamente informado sobre a pesquisa e concorda voluntariamente em participar."},
+{s:"Pesquisa com Seres Humanos", q:"Segundo a Resolução CNS nº 466/2012, os princípios éticos fundamentais que devem nortear toda pesquisa com seres humanos incluem:", o:["Autonomia, beneficência, não maleficência e justiça","Lucratividade, sigilo absoluto e celeridade processual","Apenas o consentimento verbal informal","Exclusivamente a aprovação do orientador acadêmico"], c:0, e:"A Resolução CNS nº 466/2012 baseia-se nos princípios bioéticos de autonomia, beneficência, não maleficência e justiça, garantindo a dignidade e os direitos dos participantes."},
+
+// ===================== PSICOLOGIA APLICADA À SAÚDE (4) =====================
+{s:"Psicologia Aplicada à Saúde", q:"Segundo Elisabeth Kübler-Ross, os estágios clássicos do processo de luto, na ordem geralmente descrita, são:", o:["Negação, raiva, barganha, depressão e aceitação","Aceitação, negação, raiva, barganha e depressão","Depressão, aceitação, negação, raiva e barganha","Raiva, aceitação, negação, depressão e barganha"], c:0, e:"Kübler-Ross descreveu cinco estágios do luto: negação, raiva, barganha, depressão e aceitação, não necessariamente lineares ou universais."},
+{s:"Psicologia Aplicada à Saúde", q:"Os cuidados paliativos têm como objetivo principal:", o:["Curar a doença de base a qualquer custo","Prolongar a vida por meio de medidas invasivas independentemente do prognóstico","Promover qualidade de vida ao paciente e à família diante de doença ameaçadora da vida, controlando dor e outros sintomas","Ser aplicados exclusivamente nas últimas 24 horas de vida"], c:2, e:"Segundo a OMS, cuidados paliativos visam melhorar a qualidade de vida de pacientes e familiares diante de doenças ameaçadoras da vida, por meio do controle da dor e de sintomas físicos, psicossociais e espirituais."},
+{s:"Psicologia Aplicada à Saúde", q:"Na fase de 'barganha' do processo de luto, é comum que o paciente ou familiar:", o:["Negue completamente o diagnóstico recebido","Tente negociar mais tempo de vida ou uma melhora, muitas vezes por meio de promessas","Aceite serenamente a situação sem resistência","Demonstre indiferença total ao prognóstico"], c:1, e:"Na fase de barganha, a pessoa tenta negociar (com Deus, a equipe de saúde ou consigo mesma) mais tempo ou uma melhora do quadro, frequentemente por meio de promessas."},
+{s:"Psicologia Aplicada à Saúde", q:"É correto afirmar sobre os cuidados paliativos que:", o:["Devem ser iniciados apenas quando todas as possibilidades terapêuticas curativas se esgotarem","Podem ser oferecidos precocemente, em conjunto com terapias que visam prolongar a vida, desde a identificação de uma doença ameaçadora da vida","São aplicáveis somente a pacientes oncológicos","Excluem o suporte à família do paciente"], c:1, e:"Os cuidados paliativos modernos devem ser iniciados precocemente, concomitantemente a tratamentos curativos ou que prolonguem a vida, e não apenas na fase final da doença."},
+
+// ===================== FISIOLOGIA HUMANA E BIOFÍSICA (4) =====================
+{s:"Fisiologia e Biofísica", q:"O transporte de substâncias através da membrana celular que ocorre a favor do gradiente de concentração, sem gasto de energia (ATP), é chamado de:", o:["Transporte ativo primário","Transporte passivo (difusão)","Bomba de sódio e potássio","Fagocitose"], c:1, e:"O transporte passivo, como a difusão simples e facilitada, ocorre a favor do gradiente de concentração e não requer gasto energético direto de ATP."},
+{s:"Fisiologia e Biofísica", q:"A bomba de sódio e potássio (Na+/K+ ATPase), presente na membrana plasmática, é um exemplo de:", o:["Transporte passivo por difusão simples","Transporte ativo, com gasto de energia (ATP), contra o gradiente de concentração","Osmose facilitada","Filtração por pressão hidrostática"], c:1, e:"A bomba de sódio e potássio é um transporte ativo primário, pois utiliza ATP para mover íons contra o gradiente de concentração (retira Na+ e introduz K+ na célula)."},
+{s:"Fisiologia e Biofísica", q:"A unidade estrutural e funcional básica do sistema nervoso é:", o:["O axônio","O neurônio","A célula de Schwann","A sinapse exclusivamente"], c:1, e:"O neurônio é a unidade estrutural e funcional básica do sistema nervoso, responsável pela condução e transmissão dos impulsos nervosos."},
+{s:"Fisiologia e Biofísica", q:"A transmissão do impulso nervoso entre dois neurônios ocorre, tipicamente, por meio de:", o:["Contato direto entre citoplasmas (sincício verdadeiro)","Liberação de neurotransmissores na fenda sináptica","Transporte de oxigênio pela hemoglobina","Difusão de glicose pela membrana"], c:1, e:"Na sinapse química, o impulso nervoso é transmitido por meio da liberação de neurotransmissores na fenda sináptica, que se ligam a receptores no neurônio pós-sináptico."},
+
+// ===================== FUNDAMENTOS TEÓRICOS E TÉCNICOS DE ENFERMAGEM (4) =====================
+{s:"Fundamentos Técnicos de Enfermagem", q:"O registro de enfermagem no prontuário do paciente deve ser, EXCETO:", o:["Claro, objetivo e cronológico","Realizado com letra legível, sem rasuras, identificando o profissional responsável","Feito de forma subjetiva, podendo omitir informações relevantes a critério pessoal do profissional","Fidedigno aos fatos observados e às condutas realizadas"], c:2, e:"O registro de enfermagem deve ser sempre completo, objetivo, fiel aos fatos e nunca omitir informações relevantes por critério pessoal, pois constitui documento legal."},
+{s:"Fundamentos Técnicos de Enfermagem", q:"Os sinais vitais classicamente avaliados na prática de enfermagem incluem:", o:["Temperatura, frequência cardíaca, frequência respiratória e pressão arterial","Apenas glicemia capilar e peso corporal","Exclusivamente a saturação de oxigênio","Altura e circunferência abdominal"], c:0, e:"Os sinais vitais tradicionais são temperatura corporal, frequência cardíaca (pulso), frequência respiratória e pressão arterial, frequentemente acrescidos da saturação de oxigênio e da dor como 5º sinal vital."},
+{s:"Fundamentos Técnicos de Enfermagem", q:"A temperatura corporal considerada normal (afebril) em adultos, por via axilar, situa-se geralmente entre:", o:["30,0°C e 34,0°C","35,5°C e 37,0°C","38,5°C e 39,5°C","40,0°C e 41,0°C"], c:1, e:"A temperatura axilar normal em adultos situa-se, em geral, entre 35,5°C e 37,0°C, sendo consideradas febre valores acima de 37,8°C, dependendo do parâmetro institucional."},
+{s:"Fundamentos Técnicos de Enfermagem", q:"O registro de enfermagem é considerado, do ponto de vista legal, um documento:", o:["Sem qualquer valor jurídico","De valor legal, podendo ser utilizado como prova em processos éticos e judiciais","Válido apenas se assinado por um médico","Descartável após a alta do paciente"], c:1, e:"O registro de enfermagem tem valor legal e pode ser utilizado como prova documental em processos éticos, administrativos e judiciais, refletindo a assistência prestada."},
+
+// ===================== NUTRIÇÃO E DIETÉTICA (3) =====================
+{s:"Nutrição e Dietética", q:"Uma alimentação saudável, segundo o Guia Alimentar para a População Brasileira, deve priorizar:", o:["Alimentos ultraprocessados como base da dieta","Alimentos in natura ou minimamente processados, com uso moderado de óleos, sal e açúcar","Exclusão total de gorduras, mesmo as insaturadas","Consumo exclusivo de suplementos alimentares industrializados"], c:1, e:"O Guia Alimentar para a População Brasileira recomenda priorizar alimentos in natura ou minimamente processados, evitando ultraprocessados e usando com moderação óleos, sal e açúcar."},
+{s:"Nutrição e Dietética", q:"O processamento de alimentos que envolve a adição de sal, açúcar, óleo ou outra substância a um alimento in natura, como no caso de conservas caseiras, é classificado, segundo a NOVA, como alimento:", o:["Ultraprocessado","In natura","Processado","Minimamente processado apenas"], c:2, e:"Alimentos processados são produtos fabricados com adição de sal, açúcar ou óleo a alimentos in natura, como conservas, queijos e pães simples, diferindo dos ultraprocessados por terem poucos ingredientes."},
+{s:"Nutrição e Dietética", q:"Na nutrição aplicada à enfermagem, a avaliação do estado nutricional do paciente hospitalizado é importante porque:", o:["Não influencia o processo de cicatrização e recuperação","A desnutrição pode comprometer a cicatrização, a resposta imunológica e aumentar o tempo de internação","Serve apenas para fins estatísticos, sem impacto clínico","É de responsabilidade exclusiva do nutricionista, sem participação da enfermagem"], c:1, e:"A avaliação nutricional é fundamental, pois a desnutrição compromete a cicatrização de feridas, a resposta imunológica e pode prolongar o tempo de internação, sendo a enfermagem corresponsável por essa vigilância."},
+
+// ===================== EPIDEMIOLOGIA E SAÚDE COLETIVA (3) =====================
+{s:"Epidemiologia e Saúde Coletiva", q:"Um indicador de saúde amplamente utilizado para mensurar o número de óbitos de crianças menores de 1 ano a cada mil nascidos vivos, em determinado período e local, é a:", o:["Taxa de fecundidade","Taxa de mortalidade infantil","Taxa de natalidade","Taxa de mortalidade materna"], c:1, e:"A taxa de mortalidade infantil mede o número de óbitos de crianças menores de 1 ano de idade por mil nascidos vivos, sendo um importante indicador de saúde e desenvolvimento social."},
+{s:"Epidemiologia e Saúde Coletiva", q:"A Estratégia de Saúde da Família (ESF) tem como principal característica organizacional:", o:["Atendimento exclusivamente hospitalar de alta complexidade","Reorganização da Atenção Básica por meio de equipes multiprofissionais responsáveis por um território e população adstrita definidos","Atendimento aleatório, sem vinculação territorial","Foco único em procedimentos cirúrgicos ambulatoriais"], c:1, e:"A ESF reorganiza a Atenção Básica com equipes multiprofissionais responsáveis por uma área e população adstrita definidas, priorizando vínculo, longitudinalidade e integralidade do cuidado."},
+{s:"Epidemiologia e Saúde Coletiva", q:"Os indicadores de saúde têm como principal finalidade:", o:["Substituir a necessidade de políticas públicas de saúde","Mensurar e monitorar a situação de saúde de uma população, subsidiando o planejamento e a avaliação de ações e serviços","Servir apenas para fins de pesquisa acadêmica, sem aplicação prática","Avaliar exclusivamente o desempenho financeiro dos hospitais"], c:1, e:"Os indicadores de saúde (como taxas de mortalidade, morbidade e cobertura vacinal) mensuram a situação de saúde da população, orientando o planejamento, monitoramento e avaliação de políticas e ações de saúde."},
+
+// ===================== ESTRATÉGIA DE SAÚDE DA FAMÍLIA (4) =====================
+{s:"Estratégia de Saúde da Família", q:"A visita domiciliar realizada pela equipe de Saúde da Família tem como um dos principais objetivos:", o:["Substituir totalmente as consultas na Unidade Básica de Saúde","Conhecer a realidade socioeconômica e familiar do usuário, fortalecendo o vínculo e ampliando o acesso ao cuidado","Ser realizada apenas em caráter punitivo ou fiscalizador","Ocorrer exclusivamente em situações de óbito domiciliar"], c:1, e:"A visita domiciliar permite conhecer o contexto socioeconômico, familiar e ambiental do usuário, fortalecendo o vínculo entre a equipe e a comunidade e ampliando o acesso ao cuidado, especialmente para pessoas com dificuldade de locomoção."},
+{s:"Estratégia de Saúde da Família", q:"A Rede de Atenção à Saúde (RAS) organiza os serviços do SUS de forma:", o:["Fragmentada e hierárquica rígida, sem comunicação entre os níveis","Poliárquica, com pontos de atenção de diferentes densidades tecnológicas que se comunicam de forma integrada, tendo a Atenção Básica como coordenadora do cuidado","Exclusivamente centrada nos hospitais terciários","Baseada apenas no atendimento privado suplementar"], c:1, e:"A RAS organiza os pontos de atenção (básica, especializada, urgência, hospitalar) de forma integrada e não hierárquica, com a Atenção Básica atuando como ordenadora e coordenadora do cuidado."},
+{s:"Estratégia de Saúde da Família", q:"A Atenção Básica de Saúde, no âmbito do SUS, caracteriza-se por ser a porta de entrada preferencial do sistema, tendo como atributo essencial:", o:["Alta densidade tecnológica e foco em procedimentos de alta complexidade","Longitudinalidade do cuidado, com acompanhamento contínuo do usuário ao longo do tempo","Atendimento pontual, sem vínculo com a equipe de saúde","Exclusividade no atendimento a doenças agudas graves"], c:1, e:"A Atenção Básica caracteriza-se pela longitudinalidade (acompanhamento contínuo do indivíduo ao longo do tempo), além de acesso, coordenação do cuidado e integralidade."},
+{s:"Estratégia de Saúde da Família", q:"Na Estratégia de Saúde da Família, o profissional que atua fazendo a ponte entre a comunidade e a equipe de saúde, realizando visitas domiciliares regulares em sua microárea, é o(a):", o:["Médico da família","Agente Comunitário de Saúde (ACS)","Enfermeiro auditor","Farmacêutico clínico"], c:1, e:"O Agente Comunitário de Saúde (ACS) é o profissional responsável por realizar visitas domiciliares regulares em sua microárea, atuando como elo entre a comunidade e a equipe de Saúde da Família."},
+
+// ===================== SEMIOLOGIA E SEMIOTÉCNICA (6) =====================
+{s:"Semiologia e Semiotécnica", q:"A sondagem nasoentérica (SNE) tem como principal indicação:", o:["Drenagem de conteúdo gástrico em casos de obstrução intestinal alta apenas","Administração de dietas e/ou medicamentos diretamente no intestino delgado, em pacientes com dificuldade de deglutição ou risco de aspiração","Coleta de amostras de urina para exame","Administração de oxigenoterapia contínua"], c:1, e:"A sonda nasoentérica é indicada principalmente para nutrição enteral e/ou administração de medicamentos em pacientes que não podem se alimentar por via oral, reduzindo o risco de broncoaspiração em comparação à sonda nasogástrica em alguns contextos."},
+{s:"Semiologia e Semiotécnica", q:"No cálculo de medicamentos, se a prescrição indica 500 mg de um fármaco e cada comprimido disponível contém 250 mg, quantos comprimidos devem ser administrados?", o:["1 comprimido","2 comprimidos","3 comprimidos","4 comprimidos"], c:1, e:"Cálculo: dose prescrita ÷ dose disponível = 500 mg ÷ 250 mg = 2 comprimidos."},
+{s:"Semiologia e Semiotécnica", q:"São vias de administração de medicamentos, EXCETO:", o:["Via oral","Via intramuscular","Via subcutânea","Via mitocondrial"], c:3, e:"'Via mitocondrial' não existe como via de administração de medicamentos. As vias reais incluem oral, intramuscular, subcutânea, intravenosa, intradérmica, entre outras."},
+{s:"Semiologia e Semiotécnica", q:"No exame físico, a técnica de percussão é utilizada, principalmente, para:", o:["Avaliar temperatura da pele por contato","Identificar sons e detectar a presença de líquido, ar ou massas em cavidades e órgãos internos","Auscultar ruídos cardíacos e pulmonares exclusivamente","Medir a pressão arterial do paciente"], c:1, e:"A percussão consiste em golpear levemente a superfície corporal para gerar sons que ajudam a identificar a presença de ar, líquido ou massas em órgãos e cavidades, como no tórax e abdome."},
+{s:"Semiologia e Semiotécnica", q:"A sondagem vesical de demora tem como uma de suas principais indicações:", o:["Controle rigoroso do débito urinário em pacientes críticos ou com retenção urinária","Administração de dieta enteral","Coleta de escarro para cultura","Aferição da pressão arterial invasiva"], c:0, e:"A sondagem vesical de demora é indicada principalmente para monitorização rigorosa do débito urinário (balanço hídrico) em pacientes críticos, ou em casos de retenção urinária e obstrução."},
+{s:"Semiologia e Semiotécnica", q:"Antes de administrar qualquer medicamento, a enfermagem deve observar os 'certos' da administração de medicamentos, que incluem:", o:["Paciente certo, medicamento certo, dose certa, via certa e horário certo","Apenas o nome do médico prescritor","Somente a cor do medicamento","Exclusivamente o preço do medicamento"], c:0, e:"Os 'certos' clássicos da administração segura de medicamentos incluem paciente certo, medicamento certo, dose certa, via certa, horário certo, além de registro certo e orientação certa, conforme protocolos atualizados."},
+
+// ===================== PARASITOLOGIA (3) =====================
+{s:"Parasitologia", q:"As doenças parasitárias são causadas, principalmente, por organismos como:", o:["Vírus e príons exclusivamente","Helmintos e protozoários","Apenas bactérias Gram-positivas","Somente fungos filamentosos"], c:1, e:"As doenças parasitárias são classicamente causadas por helmintos (vermes) e protozoários, organismos que vivem às custas de um hospedeiro, causando dano ao mesmo."},
+{s:"Parasitologia", q:"Os protozoários são organismos caracterizados por serem:", o:["Multicelulares e fotossintetizantes","Unicelulares eucariontes, podendo ser parasitas do ser humano","Procariontes desprovidos de núcleo organizado","Estruturas acelulares, como os vírus"], c:1, e:"Os protozoários são organismos unicelulares eucariontes (possuem núcleo organizado), e diversas espécies são parasitas de humanos, como Entamoeba histolytica e Giardia lamblia."},
+{s:"Parasitologia", q:"A giardíase, doença parasitária intestinal comum, é causada pelo protozoário:", o:["Plasmodium falciparum","Giardia lamblia (Giardia intestinalis)","Trypanosoma cruzi","Toxoplasma gondii"], c:1, e:"A giardíase é causada pelo protozoário Giardia lamblia (também chamado Giardia intestinalis ou Giardia duodenalis), transmitido por água ou alimentos contaminados por cistos."},
+
+// ===================== FARMACOLOGIA (4) =====================
+{s:"Farmacologia", q:"Os hipoglicemiantes orais, como a metformina, são medicamentos utilizados principalmente no tratamento de:", o:["Hipertensão arterial","Diabetes mellitus tipo 2","Infecções bacterianas","Dor crônica"], c:1, e:"A metformina é um hipoglicemiante oral (biguanida) amplamente utilizado no tratamento do diabetes mellitus tipo 2, reduzindo a produção hepática de glicose e aumentando a sensibilidade à insulina."},
+{s:"Farmacologia", q:"Os antimicrobianos de amplo espectro são indicados, principalmente, quando:", o:["O agente causador da infecção já é conhecido com precisão e é sensível a um único fármaco específico","Há suspeita de infecção grave sem identificação prévia do microrganismo, cobrindo uma ampla gama de patógenos","O paciente não apresenta nenhum sinal de infecção","Deseja-se evitar qualquer efeito colateral"], c:1, e:"Antimicrobianos de amplo espectro são frequentemente utilizados empiricamente em infecções graves quando o agente causador ainda não foi identificado, cobrindo diversos tipos de microrganismos."},
+{s:"Farmacologia", q:"Na escolha de um anti-inflamatório não esteroidal (AINE), deve-se considerar com cautela pacientes com:", o:["Histórico de úlcera péptica e doença renal, pelo risco de sangramento gastrointestinal e nefrotoxicidade","Apenas pacientes jovens e saudáveis, sem outras restrições","Ausência de qualquer contraindicação, podendo ser usado livremente em qualquer paciente","Pacientes com hipoglicemia isolada"], c:0, e:"Os AINEs devem ser usados com cautela em pacientes com histórico de úlcera péptica (risco de sangramento gastrointestinal) e doença renal (risco de nefrotoxicidade), pela inibição das prostaglandinas protetoras."},
+{s:"Farmacologia", q:"A enterocolite associada a antibióticos, com absorção alterada de nutrientes, pode estar relacionada a:", o:["Ação exclusivamente benéfica dos antibióticos sobre a mucosa intestinal","Desequilíbrio da microbiota intestinal (disbiose), podendo favorecer a proliferação de patógenos como Clostridioides difficile","Aumento da absorção de todos os nutrientes sem qualquer prejuízo","Ausência total de efeitos sobre o trato gastrointestinal"], c:1, e:"O uso de antibióticos pode causar disbiose intestinal, alterando a absorção de nutrientes e favorecendo a proliferação de patógenos oportunistas, como o Clostridioides difficile, causando enterocolite."},
+
+// ===================== IMUNOLOGIA (2) =====================
+{s:"Imunologia", q:"A imunidade inata, primeira linha de defesa do organismo, é caracterizada por:", o:["Ser específica para cada patógeno e depender de memória imunológica prévia","Ser inespecífica, de resposta rápida, presente desde o nascimento, incluindo barreiras físicas, células fagocitárias e o sistema complemento","Depender exclusivamente da produção de anticorpos por linfócitos B","Ser desenvolvida apenas após vacinação"], c:1, e:"A imunidade inata é a primeira linha de defesa, inespecífica e de resposta rápida, presente desde o nascimento, incluindo barreiras físicas (pele, mucosas), células fagocitárias (neutrófilos, macrófagos) e o sistema complemento."},
+{s:"Imunologia", q:"São exemplos de componentes da imunidade inata:", o:["Linfócitos T e B de memória","Pele, mucosas, neutrófilos, macrófagos e células natural killer (NK)","Anticorpos específicos produzidos após vacinação","Apenas o sistema linfático adaptativo"], c:1, e:"Componentes da imunidade inata incluem barreiras físicas (pele e mucosas), células fagocitárias (neutrófilos, macrófagos) e células natural killer (NK), que atuam de forma rápida e inespecífica."},
+
+// ===================== ÉTICA, EXERCÍCIO PROFISSIONAL E DIREITOS HUMANOS (3) =====================
+{s:"Ética e Exercício Profissional", q:"O Código de Ética dos Profissionais de Enfermagem estabelece deveres, direitos e proibições relacionados ao exercício profissional, tendo como um de seus princípios fundamentais:", o:["A priorização de interesses financeiros pessoais em detrimento do cuidado","O respeito à dignidade, à vida e aos direitos da pessoa humana em todas as fases do processo de cuidar","A permissão para discriminação de pacientes por qualquer motivo","A dispensa de sigilo profissional em qualquer circunstância"], c:1, e:"O Código de Ética de Enfermagem tem como princípio fundamental o respeito à dignidade, à vida e aos direitos humanos, orientando a conduta ética em todas as etapas do cuidado."},
+{s:"Ética e Exercício Profissional", q:"Nas relações de trabalho em enfermagem, o assédio moral caracteriza-se por:", o:["Elogios ocasionais ao desempenho do colaborador","Exposição do trabalhador a situações humilhantes e constrangedoras, repetitivas e prolongadas durante a jornada de trabalho","Feedback construtivo pontual sobre uma tarefa específica","Distribuição justa e transparente de tarefas na equipe"], c:1, e:"O assédio moral no trabalho caracteriza-se pela exposição repetida e prolongada do trabalhador a situações humilhantes e constrangedoras, causando dano à sua dignidade e saúde psíquica."},
+{s:"Ética e Exercício Profissional", q:"Os direitos humanos, no contexto da assistência à saúde, garantem, entre outros aspectos:", o:["Que apenas pacientes com plano de saúde privado recebam atendimento digno","O direito ao acesso à saúde, à dignidade, à não discriminação e à autonomia do paciente sobre seu próprio corpo e tratamento","Que o profissional de saúde possa decidir unilateralmente sobre o tratamento sem informar o paciente","A exclusão de populações vulneráveis do sistema de saúde"], c:1, e:"Os direitos humanos aplicados à saúde garantem acesso universal, dignidade, não discriminação e autonomia do paciente para decidir sobre seu tratamento, com base no consentimento informado."},
+
+// ===================== SAÚDE DA MULHER (2) =====================
+{s:"Saúde da Mulher", q:"A consulta de enfermagem em saúde da mulher, no contexto do pré-natal, tem como um de seus principais objetivos:", o:["Substituir totalmente o acompanhamento médico obstétrico em qualquer situação de risco","Realizar acompanhamento sistematizado da gestante, identificando fatores de risco, orientando sobre autocuidado e monitorando a evolução da gestação","Ser realizada apenas uma única vez durante toda a gestação","Focar exclusivamente em procedimentos cirúrgicos"], c:1, e:"A consulta de enfermagem no pré-natal visa o acompanhamento sistematizado da gestante, com identificação precoce de fatores de risco, orientações de autocuidado e monitoramento contínuo da evolução gestacional, seguindo o processo de enfermagem."},
+{s:"Saúde da Mulher", q:"Durante a consulta de enfermagem em saúde da mulher, a coleta de dados deve incluir, entre outros aspectos:", o:["Apenas o peso corporal, sem outras informações","Anamnese completa, exame físico, histórico ginecológico e obstétrico, e orientações de promoção à saúde","Exclusivamente exames laboratoriais, sem entrevista com a paciente","Somente a prescrição de medicamentos, sem avaliação clínica"], c:1, e:"A consulta de enfermagem em saúde da mulher deve incluir anamnese completa, exame físico, histórico ginecológico e obstétrico, além de orientações educativas e de promoção da saúde, seguindo as etapas do processo de enfermagem."},
+
+// ===================== ENFERMAGEM EM CENTRAL DE MATERIAL E ESTERILIZAÇÃO (2) =====================
+{s:"Central de Material e Esterilização", q:"A Central de Material e Esterilização (CME) é a unidade hospitalar responsável, principalmente, por:", o:["Realizar exclusivamente consultas médicas ambulatoriais","Processar (limpar, preparar, esterilizar e distribuir) os artigos e instrumentais utilizados na assistência à saúde, garantindo sua segurança microbiológica","Administrar medicamentos diretamente aos pacientes internados","Realizar exames de imagem diagnóstica"], c:1, e:"A CME é responsável pelo processamento completo de artigos e instrumentais (limpeza, preparo, esterilização, armazenamento e distribuição), garantindo a segurança microbiológica dos materiais utilizados na assistência."},
+{s:"Central de Material e Esterilização", q:"A estrutura física e funcional da CME deve ser organizada de forma a garantir, principalmente:", o:["O fluxo unidirecional dos materiais, da área suja para a área limpa e estéril, evitando contaminação cruzada","A mistura livre entre materiais sujos e estéreis no mesmo ambiente","A ausência de qualquer separação entre as áreas de trabalho","O uso de uma única sala para todas as etapas do processamento, sem distinção de fluxo"], c:0, e:"A CME deve ser estruturada com fluxo unidirecional (área suja → área de preparo/limpa → área de esterilização → área de armazenamento estéril), evitando o cruzamento entre materiais contaminados e estéreis."},
+
+// ===================== POLÍTICAS PÚBLICAS NA ATENÇÃO BÁSICA (2) =====================
+{s:"Políticas Públicas na Atenção Básica", q:"A Lei Orgânica da Saúde nº 8.080, de 1990, dispõe sobre:", o:["A criação exclusiva de planos de saúde privados","As condições para a promoção, proteção e recuperação da saúde, a organização e o funcionamento dos serviços correspondentes no âmbito do SUS","A regulamentação exclusiva da profissão médica","A criação do Fundo de Garantia do Tempo de Serviço (FGTS)"], c:1, e:"A Lei nº 8.080/1990 (Lei Orgânica da Saúde) regulamenta as condições para promoção, proteção e recuperação da saúde, além da organização e funcionamento dos serviços de saúde no âmbito do SUS."},
+{s:"Políticas Públicas na Atenção Básica", q:"A vigilância em saúde, no contexto das políticas públicas de Atenção Básica, tem como finalidade principal:", o:["Observar exclusivamente indicadores econômicos regionais","Analisar continuamente a situação de saúde da população, identificando riscos e agravos, para subsidiar o planejamento e a execução de ações de prevenção e controle","Substituir integralmente a assistência clínica individual","Fiscalizar apenas estabelecimentos comerciais de alimentos"], c:1, e:"A vigilância em saúde tem como finalidade a análise contínua da situação de saúde da população, identificando riscos e agravos, para orientar o planejamento de ações de prevenção, promoção e controle de doenças."},
+];
+
+let userAnswers = new Array(questions.length).fill(null);
+
+// Populate subject filter dynamically
+const subjects = [...new Set(questions.map(q => q.s))];
+const filterSelect = document.getElementById('filterSubject');
+subjects.forEach(sub => {
+  const opt = document.createElement('option');
+  opt.value = sub;
+  opt.textContent = sub;
+  filterSelect.appendChild(opt);
+});
+
+function renderQuestions(filter){
+  const list = document.getElementById('questionsList');
+  list.innerHTML = '';
+  let visibleIdx = 0;
+  questions.forEach((item, idx) => {
+    if(filter !== 'all' && item.s !== filter) return;
+    visibleIdx++;
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.innerHTML = `
+      <span class="tag">${item.s}</span>
+      <h3><span class="qnum">${visibleIdx}.</span> ${item.q}</h3>
+      <div class="options" id="opts-${idx}"></div>
+      <div class="explanation" id="expl-${idx}">💡 <strong>Explicação:</strong> ${item.e}</div>
+    `;
+    list.appendChild(card);
+    const optsDiv = card.querySelector(`#opts-${idx}`);
+    item.o.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.textContent = optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optsDiv.appendChild(btn);
+    });
+    if(userAnswers[idx] !== null){
+      applyAnswerState(idx);
+    }
+  });
+  updateScore();
+}
+
+function selectAnswer(idx, oIdx){
+  if(userAnswers[idx] !== null) return;
+  userAnswers[idx] = oIdx;
+  applyAnswerState(idx);
+  updateScore();
+}
+
+function applyAnswerState(idx){
+  const item = questions[idx];
+  const optsDiv = document.getElementById(`opts-${idx}`);
+  if(!optsDiv) return;
+  const buttons = optsDiv.querySelectorAll('.option');
+  buttons.forEach((b, i) => {
+    b.classList.add('disabled');
+    if(i === item.c) b.classList.add('correct');
+    else if(i === userAnswers[idx]) b.classList.add('wrong');
+  });
+  const expl = document.getElementById(`expl-${idx}`);
+  if(expl) expl.classList.add('show');
+}
+
+function updateScore(){
+  const total = userAnswers.filter(a => a !== null).length;
+  const correct = userAnswers.filter((a,i) => a === questions[i].c).length;
+  document.getElementById('scoreBadge').textContent = `Acertos: ${correct} / ${total}`;
+}
+
+document.getElementById('filterSubject').addEventListener('change', (e) => {
+  renderQuestions(e.target.value);
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  userAnswers = new Array(questions.length).fill(null);
+  renderQuestions(document.getElementById('filterSubject').value);
+});
+
+// TABS
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+renderQuestions('all');
+</script>
+
+</body>
+</html>
